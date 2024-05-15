@@ -1,0 +1,18 @@
+Tomcat(WAS) 구동하면 web.xml을 먼저 읽어드린다.
+web.xml 내에 기재되어 있는 설정파일을 차례대로 읽으면서 실행한다.
+
+URL 접속시에
+[ Fillter > Servlet > Interceptor > AOP > Controller ]
+순으로 요청이 들어오게 된다.
+  - Fillter : 요청과 응답을 정제하는 역할(금지되어 있는 데이터를 걸러주는 등의 역할을 수행)
+  - (Java)Servlet : 동적으로 맵핑 URL을 연결하는 역할
+  - Interceptor :
+  - AOP :
+  ** Dispatcher Servlet : 기존의 Java Servlet은 모든 맵핑 URL에 대한 정의가 필요했으나 Dispatcher Servlet은 모든 맵핑 URL에 대해 자동으로 핸들링을 수행
+
+extends VS. implements
+  - extends : 부모 메소드를 그대로 호출하여 사용 또는 override 하여 사용
+  - implements : 부모 메소그를 무조건 override 하여 사용(부모에는 구조만 작성해놓고 자식에서 무조건 재정의하여 사용)
+
+interface : 메소드를 선언만 한다. interface를 implements 하여 재정의하여 사용한다.
+listener : 어플리케이션 시작과 종료, 세션에 추가 및 수정등의 이벤트가 발생되었을 때 해당 시점을 잡아서 발동하는 역할
