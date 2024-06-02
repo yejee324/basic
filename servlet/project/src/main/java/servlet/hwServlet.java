@@ -6,12 +6,17 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.mberDao;
+import vo.mberVo;
 @WebServlet("/hw/index")
 public class hwServlet extends HttpServlet {
 
@@ -64,30 +69,74 @@ public class hwServlet extends HttpServlet {
 		System.out.println("doGet");
 		this.service(req, resp);
 	}
+
+//	@Override
+//	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		// TODO Auto-generated method stub
+//		System.out.println("service1");
+//
+//		ArrayList<mberVo> memList = new ArrayList<mberVo>();
+//		
+//		try {
+//			connDB();
+//			String query = "SELECT * FROM MBER WHERE 1=1;";
+//			System.out.println(query);
+//			ResultSet rs = stmt.executeQuery(query);
+//			
+//			while (rs.next()) {
+//
+//				mberVo vo = new mberVo();
+//				String mberSeq = rs.getString("mber_seq");
+//				String id = rs.getString("id");
+//				String name = rs.getString("name");
+//				String birh = rs.getString("birh");
+//				String gendCd = rs.getString("gend_cd");
+//				String mptel = rs.getString("mptel");
+//				String createDate = rs.getString("create_date");
+//				
+//				vo.setMberSeq(mberSeq);
+//				vo.setId(id);
+//				vo.setName(name);
+//				vo.setBirh(birh);
+//				vo.setGendCd(gendCd);
+//				vo.setMptel(mptel);
+//				vo.setCreateDate(createDate);
+//				
+//				memList.add(vo);
+//			}
+//
+//			req.setAttribute("mberList", memList);
+//			rs.close();
+//			stmt.close();
+//			con.close();
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		req.getRequestDispatcher("/WEB-INF/hw/index.jsp").forward(req, resp);
+//	}
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("service");
+		System.out.println("service2");
+
+		
 		ArrayList<mberVo> memList = new ArrayList<mberVo>();
+		mberDao mberDao = new mberDao();
 		
 		try {
-			connDB();
-			String query = "SELECT * FROM MBER WHERE 1=1;";
-			System.out.println(query);
-			ResultSet rs = stmt.executeQuery(query);
-			
-			while (rs.next()) {
-
+			List<mberVo> list = mberDao.selectDataAll();
+			for(int i=0; i<list.size(); i ++) {
 				mberVo vo = new mberVo();
-				String mberSeq = rs.getString("mber_seq");
-				String id = rs.getString("id");
-				String name = rs.getString("name");
-				String birh = rs.getString("birh");
-				String gendCd = rs.getString("gend_cd");
-				String mptel = rs.getString("mptel");
-				String createDate = rs.getString("create_date");
-				
+				String mberSeq = list.get(i).getMberSeq();
+				String id = list.get(i).getId();
+				String name = list.get(i).getName();
+				String birh = list.get(i).getBirh();
+				String gendCd = list.get(i).getGendCd();
+				String mptel = list.get(i).getMptel();
+				String createDate = list.get(i).getCreateDate();
+
 				vo.setMberSeq(mberSeq);
 				vo.setId(id);
 				vo.setName(name);
@@ -95,21 +144,16 @@ public class hwServlet extends HttpServlet {
 				vo.setGendCd(gendCd);
 				vo.setMptel(mptel);
 				vo.setCreateDate(createDate);
-				
+
 				memList.add(vo);
 			}
-
-			req.setAttribute("mberList", memList);
-			rs.close();
-			stmt.close();
-			con.close();
-		}catch(Exception e) {
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+		req.setAttribute("mberList", memList);		
 		req.getRequestDispatcher("/WEB-INF/hw/index.jsp").forward(req, resp);
-		
-		// super.service(req, resp);
 	}
 	
 	
