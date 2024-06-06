@@ -6,7 +6,7 @@
 	<properties resource="properties/db.properties" />
 	<!-- 별명 부여 -->
 	<typeAliases>
-		<typeAlias type="servlet.mberVo" alias="mberVo" />
+		<typeAlias type="mber.vo.mberVo" alias="mberVo" />
 	</typeAliases>
 	<!-- DB접속 정보 셋팅 -->
 	<environments default="development">
@@ -22,6 +22,6 @@
 	</environments>
 	<!-- mapper.xml 파일 설정 -->
 	<mappers>
-		<mapper resource="mybatis/mber-mapper.xml" />
+		<mapper resource="mber/dao/mber-mapper.xml" />
 	</mappers>
 </configuration>

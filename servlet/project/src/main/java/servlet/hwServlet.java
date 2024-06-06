@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.mberDao;
-import vo.mberVo;
+import mber.dao.mberDao;
+import mber.vo.mberVo;
 @WebServlet("/hw/index")
 public class hwServlet extends HttpServlet {
 
